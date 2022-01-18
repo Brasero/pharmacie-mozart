@@ -1,0 +1,7 @@
+{
+  "name": "Pharmacie Mozart",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
