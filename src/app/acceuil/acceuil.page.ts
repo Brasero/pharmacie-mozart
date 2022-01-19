@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PhotoService } from '../services/photo.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-acceuil',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./acceuil.page.scss'],
 })
 export class AcceuilPage implements OnInit {
+  constructor(private router: Router, private camera: PhotoService) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  navigateTo(target) {
+    this.router.navigate(['tabs/' + target]);
   }
 
+  addOrdonnanceToGallery() {
+    this.camera.addNewToGallery().then(() => this.navigateTo('gallerie'));
+  }
 }

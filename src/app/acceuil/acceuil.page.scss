@@ -1,0 +1,45 @@
+.display-column-align-center * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-inline: 12%;
+}
+
+.brandLogo {
+  height: 190px;
+  width: --webkit-fill-available;
+  border: 1px solid black;
+  margin-top: 12%;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionButton {
+  --border-radius: 12px;
+  font-weight: bold;
+}
+
+.town {
+  flex-direction: row !important;
+  margin: 0 !important;
+  width: 100% !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.zip {
+  margin: 0px !important;
+  margin-right: 5px !important;
+}
+
+.navigateContainer {
+  margin-top: 25px !important;
+}
+
+.navigateAppContainer {
+  border: 1px solid black;
+  height: 50px;
+  width: 200px;
+}

@@ -1,7 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Choisissez une photo</ion-title>
+    <ion-title>Envoyer une ordonnance</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input value="{{beneficiaire}}"></ion-input>
+      </ion-col>
+      <ion-col
+        size="12"
+        *ngFor="let photo of photoService.photos; index as position"
+      >
+        <ion-img [src]="photo.webviewPath"></ion-img>
+      </ion-col>
+      <ion-col size="12" *ngIf="photoService.photos">
+        <ion-button expand="block" color="success">Valider</ion-button>
+        <ion-button expand="block" color="danger" (click)="deleteAndRetake()">
+          <ion-icon slot="start" name="camera-outline"></ion-icon>
+          Reprendre la photo
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

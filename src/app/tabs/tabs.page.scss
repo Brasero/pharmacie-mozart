@@ -1,1 +1,22 @@
+#appNav {
+  background-color: green !important;
+  padding-left: 35%;
+}
 
+.navElement {
+  background-color: green !important;
+  color: white;
+}
+
+.navElement :only-child {
+  background-color: green !important;
+  font-size: 27px;
+}
+
+.tab-selected {
+  color: var(--color-selected);
+}
+
+.tab-selected :only-child {
+  font-size: 35px;
+}

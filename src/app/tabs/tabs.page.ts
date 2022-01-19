@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { PhotoService } from '../services/photo.service';
 
 @Component({
   selector: 'app-tabs',
@@ -11,46 +12,17 @@ import { Router } from '@angular/router';
 export class TabsPage {
   constructor(
     public actionSheet: ActionSheetController,
-    private router: Router
+    private router: Router,
+    public photoService: PhotoService
   ) {}
 
   naviguateTo(to: string) {
     this.router.navigate(['tabs/' + to]);
   }
 
-  async openNewOrdonnanceOptions() {
-    const openAction = await this.actionSheet.create({
-      header: 'Nouvelle ordonnance',
-      cssClass: '',
-      buttons: [
-        {
-          text: 'Prendre une photo',
-          role: 'take picture',
-          icon: 'camera-outline',
-          data: 'photo',
-          handler: () => {},
-        },
-        {
-          text: 'Choisir une photo dans la gallerie',
-          role: 'load picture',
-          icon: 'images-outline',
-          data: 'gallery',
-          handler: () => {
-            this.naviguateTo('gallerie');
-          },
-        },
-        {
-          text: 'Annuler',
-          icon: 'close',
-          role: 'cancel',
-          cssClass: 'danger',
-        },
-      ],
-    });
-
-    await openAction.present();
-
-    const { role, data } = await openAction.onDidDismiss();
-    console.log('onDismiss resolved with role and data', role, data);
+  addOrdonnanceToGallery() {
+    this.photoService
+      .addNewToGallery()
+      .then(() => this.naviguateTo('gallerie'));
   }
 }

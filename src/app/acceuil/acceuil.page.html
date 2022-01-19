@@ -1,9 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>acceuil</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content class="display-column-align-center">
+  <div class="brandLogo">LOGO</div>
+  <ion-button
+    type="button"
+    color="primary"
+    class="actionButton"
+    (click)="addOrdonnanceToGallery()"
+  >
+    Nouvelle ordonnance
+  </ion-button>
+  <div class="adressContainer">
+    <p>Nous situer :</p>
+    <div class="name">Pharmacie Mozart,</div>
+    <div class="street">5 Route de Metz</div>
+    <div class="town"><span class="zip">57280 </span>Maizières-lès-Metz</div>
+  </div>
+  <div class="navigateContainer">
+    <p>Voir le trajet sur :</p>
+    <div class="navigateAppContainer">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
 </ion-content>

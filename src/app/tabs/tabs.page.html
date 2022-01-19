@@ -1,14 +1,18 @@
 <ion-tabs>
-  <ion-tab-bar slot="top">
-    <ion-tab-button tab="acceuil">
+  <ion-tab-bar slot="top" id="appNav">
+    <ion-tab-button tab="acceuil" id="acceuilButton" class="navElement">
       <ion-icon name="pin-outline"></ion-icon>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab2">
+    <ion-tab-button tab="tab2" id="callButton" class="navElement">
       <ion-icon name="call-outline"></ion-icon>
     </ion-tab-button>
 
-    <ion-tab-button (click)="openNewOrdonnanceOptions()">
+    <ion-tab-button
+      (click)="addOrdonnanceToGallery()"
+      id="addButton"
+      class="navElement"
+    >
       <ion-icon name="add-circle-outline"></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>
