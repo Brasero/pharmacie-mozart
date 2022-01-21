@@ -64,7 +64,7 @@ export class PhotoService {
       promptLabelPicture: 'Prendre une photo',
       presentationStyle: 'popover',
     });
-
+    await this.deletePhoto();
     const savedImageFile = await this.savePicture(capturedPhoto);
     this.photos.unshift(savedImageFile);
     Storage.set({

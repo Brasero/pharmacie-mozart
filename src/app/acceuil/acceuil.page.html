@@ -17,8 +17,22 @@
   <div class="navigateContainer">
     <p>Voir le trajet sur :</p>
     <div class="navigateAppContainer">
-      <div></div>
-      <div></div>
+      <div class="navItem">
+        <button
+          type="button"
+          class="mapsButton"
+          (click)="navigate('google')"
+        ></button>
+        <p>Google maps</p>
+      </div>
+      <div class="navItem">
+        <button
+          type="button"
+          class="wazeButton"
+          (click)="navigate('waze')"
+        ></button>
+        <p>Waze</p>
+      </div>
     </div>
   </div>
 </ion-content>

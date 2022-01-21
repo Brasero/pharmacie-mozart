@@ -12,7 +12,7 @@ export class GalleriePage implements OnInit {
 
   ngOnInit() {
     let beneficiaire: string;
-    let commentaire: string;
+    let generiqueChoice: string;
   }
 
   private addOrdonnanceToGallery() {
@@ -22,8 +22,6 @@ export class GalleriePage implements OnInit {
   }
 
   private async deleteAndRetake() {
-    await this.photoService.deletePhoto().then(() => {
-      this.addOrdonnanceToGallery();
-    });
+    await this.addOrdonnanceToGallery();
   }
 }

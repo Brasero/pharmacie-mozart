@@ -36,10 +36,46 @@
 
 .navigateContainer {
   margin-top: 25px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .navigateAppContainer {
-  border: 1px solid black;
   height: 50px;
   width: 200px;
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-around;
+  align-items: flex-start !important;
+}
+
+.navItem {
+  padding: 0;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  height: 120px;
+  width: 60px;
+}
+
+.wazeButton {
+  background: url('../../assets/icons/waze_icon.jfif') !important;
+  height: 60px !important;
+  background-clip: border-box;
+  background-size: cover !important;
+  width: 60px;
+  border-radius: 25%;
+  margin-inline: 0% !important;
+}
+
+.mapsButton {
+  background: url('../../assets/icons/google_map_icon.jpg') !important;
+  height: 55px !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-size: 300% !important;
+  width: 55px;
+  border-radius: 25%;
+  margin-inline: 0% !important;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PhotoService } from '../services/photo.service';
 import { Router } from '@angular/router';
+import { NavigationService } from '../services/navigation.service';
 
 @Component({
   selector: 'app-acceuil',
@@ -8,8 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./acceuil.page.scss'],
 })
 export class AcceuilPage implements OnInit {
-  constructor(private router: Router, private camera: PhotoService) {}
-
+  constructor(
+    private router: Router,
+    private camera: PhotoService,
+    private nav: NavigationService
+  ) {}
   ngOnInit() {}
 
   navigateTo(target) {
@@ -18,5 +22,9 @@ export class AcceuilPage implements OnInit {
 
   addOrdonnanceToGallery() {
     this.camera.addNewToGallery().then(() => this.navigateTo('gallerie'));
+  }
+
+  navigate(app) {
+    this.nav.navigateWith(app);
   }
 }
