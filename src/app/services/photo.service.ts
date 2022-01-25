@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { LoadingController, AlertController } from '@ionic/angular';
 import {
   Camera,
   CameraDirection,
@@ -14,11 +15,13 @@ import {
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Storage } from '@capacitor/storage';
 import { Capacitor } from '@capacitor/core';
+import { Cordova } from '@awesome-cordova-plugins/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PhotoService {
+  base64Img;
   public photos: UserPhoto[] = [];
   private PHOTO_STORAGE: string = 'photos';
   private platform: Platform;
@@ -27,29 +30,29 @@ export class PhotoService {
     this.platform = platform;
   }
 
+  //Load the local saved photo
+
+  public async loadSaved() {
+    //retrieve cached photo array data
+    const photoList = await Storage.get({ key: this.PHOTO_STORAGE });
+    this.photos = JSON.parse(photoList.value) || [];
+
+    if (!this.platform.is('hybrid')) {
+      for (let photo of this.photos) {
+        const readFile = await Filesystem.readFile({
+          path: photo.filepath,
+          directory: Directory.Data,
+        });
+
+        photo.webviewPath = `data:image/jpeg;base64,${readFile.data}`;
+      }
+    }
+  }
+
   public async deletePhoto() {
     // Remove the last photo
     this.photos.splice(0, 1);
   }
-
-  //Load the local saved photo
-
-  // public async loadSaved() {
-  //   //retrieve cached photo array data
-  //   const photoList = await Storage.get({ key: this.PHOTO_STORAGE });
-  //   this.photos = JSON.parse(photoList.value) || [];
-
-  //   if (!this.platform.is('hybrid')) {
-  //     for (let photo of this.photos) {
-  //       const readFile = await Filesystem.readFile({
-  //         path: photo.filepath,
-  //         directory: Directory.Data,
-  //       });
-
-  //       photo.webviewPath = `data:image/jpeg;base64,${readFile.data}`;
-  //     }
-  //   }
-  // }
 
   public async addNewToGallery() {
     const capturedPhoto = await Camera.getPhoto({
@@ -63,9 +66,13 @@ export class PhotoService {
       promptLabelPhoto: 'Gallerie',
       promptLabelPicture: 'Prendre une photo',
       presentationStyle: 'popover',
+      saveToGallery: false,
     });
     await this.deletePhoto();
     const savedImageFile = await this.savePicture(capturedPhoto);
+    //
+    console.log({ initial: capturedPhoto, modified: savedImageFile });
+    //
     this.photos.unshift(savedImageFile);
     Storage.set({
       key: this.PHOTO_STORAGE,
@@ -85,14 +92,19 @@ export class PhotoService {
     });
 
     if (this.platform.is('hybrid')) {
+      //The problems seems to be here
       return {
         filepath: savedFile.uri,
         webviewPath: Capacitor.convertFileSrc(savedFile.uri),
+        phpFilepath: fileName,
+        phpWebviewPath: photo.webPath,
       };
     } else {
       return {
         filepath: fileName,
         webviewPath: photo.webPath,
+        phpFilepath: savedFile.uri,
+        phpWebviewPath: Capacitor.convertFileSrc(savedFile.uri),
       };
     }
   }
@@ -107,7 +119,7 @@ export class PhotoService {
       return file.data;
     } else {
       //Fetch the photo, read as a blob, then convert to base64 format
-      const response = await fetch(photo.webPath!);
+      const response = await fetch(photo.webPath);
       const blob = await response.blob();
 
       return (await this.convertBlobToBase64(blob)) as string;
@@ -128,4 +140,6 @@ export class PhotoService {
 export interface UserPhoto {
   filepath: string;
   webviewPath: string;
+  phpFilepath?: string;
+  phpWebviewPath?: string;
 }
