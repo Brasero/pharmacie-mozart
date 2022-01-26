@@ -4,7 +4,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { LoadingController, AlertController } from '@ionic/angular';
 import {
   Camera,
   CameraDirection,
@@ -15,13 +14,11 @@ import {
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Storage } from '@capacitor/storage';
 import { Capacitor } from '@capacitor/core';
-import { Cordova } from '@awesome-cordova-plugins/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PhotoService {
-  base64Img;
   public photos: UserPhoto[] = [];
   private PHOTO_STORAGE: string = 'photos';
   private platform: Platform;

@@ -1,37 +1,41 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Envoyer une ordonnance</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-toolbar>
+    <ion-title style="text-align: center">Envoyer une ordonnance</ion-title>
+  </ion-toolbar>
   <ion-grid>
     <ion-row>
       <ion-col size="12">
         <ion-item>
-          <ion-label position="floating"> Le bénéficiaire </ion-label>
+          <ion-label position="floating"> Bénéficiaire </ion-label>
           <ion-input
             [(ngModel)]="beneficiaire"
-            autocapitalize="on"
+            autocapitalize="characters"
             clear-input="true"
             inputmode="text"
             minlength="3"
             required
             type="text"
-            size="20"
-            placeholder="Nom - Prénom"
+            size="15"
+            placeholder="NOM - PRENOM"
           >
           </ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="12">
         <ion-item>
-          <ion-label>Acceptez vous les generiques ?</ion-label>
+          <ion-label position="floating"
+            >Acceptez vous les generiques ?</ion-label
+          >
           <ion-select [(ngModel)]="generique" interface="popover">
             <ion-select-option value="true">Oui</ion-select-option>
             <ion-select-option value="false">Non</ion-select-option>
           </ion-select>
         </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button expand="block" color="success" (click)="checkOrdonnance()">
+          Valider
+        </ion-button>
       </ion-col>
       <ion-col
         size="12"
@@ -40,9 +44,6 @@
         <ion-img [src]="photo.webviewPath"></ion-img>
       </ion-col>
       <ion-col size="12" *ngIf="photoService.photos">
-        <ion-button expand="block" color="success" (click)="checkOrdonnance()"
-          >Valider</ion-button
-        >
         <ion-button expand="block" color="danger" (click)="deleteAndRetake()">
           <ion-icon slot="start" name="camera-outline"></ion-icon>
           Reprendre la photo
