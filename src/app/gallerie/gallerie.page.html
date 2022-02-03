@@ -17,20 +17,28 @@
             type="text"
             size="15"
             placeholder="NOM - PRENOM"
+            (ionChange)="checkName()"
+            pattern="(?:[A-Za-z']+[ ]+[A-Za-z']+[ ]*[A-Za-z ]*)"
           >
           </ion-input>
         </ion-item>
+        <ion-note class="errorHelper" [hidden]="!nameError" color="danger">
+          {{nameError}}
+        </ion-note>
       </ion-col>
       <ion-col size="12">
         <ion-item>
-          <ion-label position="floating"
-            >Acceptez vous les generiques ?</ion-label
-          >
+          <ion-label position="floating">
+            Acceptez vous les generiques ?
+          </ion-label>
           <ion-select [(ngModel)]="generique" interface="popover">
             <ion-select-option value="true">Oui</ion-select-option>
             <ion-select-option value="false">Non</ion-select-option>
           </ion-select>
         </ion-item>
+        <ion-note color="danger" class="errorHelper" [hidden]="!genError"
+          >{{genError}}</ion-note
+        >
       </ion-col>
       <ion-col size="12">
         <ion-button expand="block" color="success" (click)="checkOrdonnance()">

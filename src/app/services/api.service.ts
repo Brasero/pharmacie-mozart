@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/quotes */
-/* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import {
@@ -17,13 +16,14 @@ import { ApiMessage } from '../class/api-message';
 export class ApiService {
   //API path
   base_path = 'http://localhost/ApiAppTest/index.php';
-
-  constructor(private http: HttpClient, private photo: PhotoService) {}
-
+  //APIKey
+  apiKey = ''; // <--- Enter Api Key;
   //Http options
   httpOptions = {
-    headers: new HttpHeaders({}),
+    headers: new HttpHeaders(),
   };
+
+  constructor(private http: HttpClient, private photo: PhotoService) {}
 
   //Handle API errors
   handleError(error: HttpErrorResponse) {
@@ -44,16 +44,8 @@ export class ApiService {
   async constructObject(b, g) {
     if (b !== undefined && g !== undefined) {
       await this.photo.loadSaved();
-      //
-      console.log({ originalPhotoData: this.photo.photos });
       const response = await fetch(this.photo.photos[0].webviewPath);
-      //
-      console.log({ fetchReturn: response });
-      //
       const blob = await response.blob();
-      //
-      console.log({ blobValue: blob });
-      //
       const obj: FormData = new FormData();
       obj.append('image', this.photo.photos[0].webviewPath);
       obj.append('beneficiaire', b);

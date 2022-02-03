@@ -30,7 +30,7 @@ export class PhotoService {
   //Load the local saved photo
 
   public async loadSaved() {
-    //retrieve cached photo array data
+    //retrieve cached photo array data return base64 photo
     const photoList = await Storage.get({ key: this.PHOTO_STORAGE });
     this.photos = JSON.parse(photoList.value) || [];
 
@@ -47,8 +47,13 @@ export class PhotoService {
   }
 
   public async deletePhoto() {
-    // Remove the last photo
-    this.photos.splice(0, 1);
+    // Remove all photos from current storage.
+    this.photos.splice(0, this.photos.length);
+    // Remove all photos from Local storage.
+    Storage.set({
+      key: this.PHOTO_STORAGE,
+      value: JSON.stringify(null),
+    });
   }
 
   public async addNewToGallery() {
@@ -57,8 +62,8 @@ export class PhotoService {
       source: CameraSource.Prompt,
       direction: CameraDirection.Rear,
       quality: 100,
-      allowEditing: true,
-      promptLabelHeader: 'Importer une nouvelle ordonnance',
+      allowEditing: false,
+      promptLabelHeader: 'Nouvelle ordonnance',
       promptLabelCancel: 'Annuler',
       promptLabelPhoto: 'Gallerie',
       promptLabelPicture: 'Prendre une photo',
@@ -67,9 +72,6 @@ export class PhotoService {
     });
     await this.deletePhoto();
     const savedImageFile = await this.savePicture(capturedPhoto);
-    //
-    console.log({ initial: capturedPhoto, modified: savedImageFile });
-    //
     this.photos.unshift(savedImageFile);
     Storage.set({
       key: this.PHOTO_STORAGE,
@@ -89,7 +91,6 @@ export class PhotoService {
     });
 
     if (this.platform.is('hybrid')) {
-      //The problems seems to be here
       return {
         filepath: savedFile.uri,
         webviewPath: Capacitor.convertFileSrc(savedFile.uri),

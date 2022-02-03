@@ -25,8 +25,12 @@
   flex-direction: row !important;
   margin: 0 !important;
   width: 100% !important;
-  align-items: center;
-  justify-content: center;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.ville {
+  margin: 0px !important;
 }
 
 .zip {
@@ -57,6 +61,9 @@
   margin-right: 0px !important;
   height: 120px;
   width: 60px;
+}
+.navItem:nth-child(2) {
+  margin-left: 15px !important;
 }
 
 .wazeButton {
