@@ -1,15 +1,21 @@
 <ion-content class="display-column-align-center">
-  <div class="brandLogo">LOGO</div>
+  <div class="brandLogo">
+    <ion-icon
+      id="brandLogo"
+      src="../../assets/icons/brandLogo.svg"
+      size="large"
+    ></ion-icon>
+  </div>
   <ion-button
     type="button"
-    color="primary"
-    class="actionButton"
+    color="secondary"
+    class="actionButton styleText3"
     (click)="addOrdonnanceToGallery()"
   >
     Nouvelle ordonnance
   </ion-button>
-  <div class="adressContainer">
-    <p>Nous situer :</p>
+  <div class="adressContainer styleText2">
+    <p class="styleText1">Nous situer :</p>
     <div class="name">Pharmacie Mozart,</div>
     <div class="street">5 Route de Metz</div>
     <div class="town">
@@ -18,7 +24,7 @@
     </div>
   </div>
   <div class="navigateContainer">
-    <p>Voir le trajet sur :</p>
+    <p class="styleText1">Voir le trajet sur :</p>
     <div class="navigateAppContainer">
       <div class="navItem">
         <button
@@ -26,7 +32,7 @@
           class="mapsButton"
           (click)="navigate('google')"
         ></button>
-        <p>Google maps</p>
+        <p class="styleText1">Google maps</p>
       </div>
       <div class="navItem">
         <button
@@ -34,7 +40,7 @@
           class="wazeButton"
           (click)="navigate('waze')"
         ></button>
-        <p>Waze</p>
+        <p class="styleText1">Waze</p>
       </div>
     </div>
   </div>

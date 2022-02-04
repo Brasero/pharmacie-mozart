@@ -1,22 +1,27 @@
 #appNav {
-  background-color: green !important;
+  background-color: var(--ion-color-primary) !important;
   padding-left: 35%;
 }
 
 .navElement {
-  background-color: green !important;
+  background-color: var(--ion-color-primary) !important;
   color: white;
+  --ripple-color: var(--ion-color-primary-shade);
 }
 
 .navElement :only-child {
-  background-color: green !important;
-  font-size: 27px;
+  background-color: var(--ion-color-primary) !important;
+  --ripple-color: var(--ion-color-primary-shade);
 }
 
 .tab-selected {
   color: var(--color-selected);
 }
 
-.tab-selected :only-child {
-  font-size: 35px;
+ion-icon {
+  transform: scale(1.3);
+}
+
+#addIcon {
+  transform: scale(1.6);
 }

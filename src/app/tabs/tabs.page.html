@@ -1,11 +1,24 @@
 <ion-tabs>
   <ion-tab-bar slot="top" id="appNav">
-    <ion-tab-button tab="acceuil" id="acceuilButton" class="navElement">
-      <ion-icon name="pin-outline"></ion-icon>
+    <ion-tab-button
+      tab="acceuil"
+      color="primary"
+      id="acceuilButton"
+      class="navElement"
+    >
+      <ion-icon
+        src="../../assets/icons/localisation.svg"
+        class="tabsIcon"
+        size="large"
+      ></ion-icon>
     </ion-tab-button>
 
     <ion-tab-button (click)="confirmCall()" id="callButton" class="navElement">
-      <ion-icon name="call-outline"></ion-icon>
+      <ion-icon
+        src="../../assets/icons/telephone.svg"
+        class="tabsIcon"
+        size="large"
+      ></ion-icon>
     </ion-tab-button>
 
     <ion-tab-button
@@ -13,7 +26,12 @@
       id="addButton"
       class="navElement"
     >
-      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-icon
+        src="../../assets/icons/addList.svg"
+        class="tabsIcon"
+        size="large"
+        id="addIcon"
+      ></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

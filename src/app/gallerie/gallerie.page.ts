@@ -19,8 +19,9 @@ export class GalleriePage implements OnInit {
   generique: boolean;
   nameError: string | boolean = false;
   genError: string | boolean = false;
-  regexName = /[²&~`{}()@!#$£¤%§\\/":<>\?|;\[\]\^,*.+¨€]+/g;
-  regexName2 = /(?:[A-Za-z'-]+[ ]+[A-Za-z'-]+[ ]*[A-Za-z'- ]*)/;
+  regexName: RegExp;
+  regexName2: RegExp;
+
   constructor(
     public photoService: PhotoService,
     private router: Router,
@@ -31,8 +32,10 @@ export class GalleriePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.beneficiaire = '';
+    this.beneficiaire = undefined;
     this.generique = undefined;
+    this.regexName = /[²&~`{}()\@!#$£¤%§\\/":<>\?|;\[\]\^,*.+¨€]+/g;
+    this.regexName2 = /(?:[A-Za-z'\-]+[ ]+[A-Za-z'\-]+[ ]*[A-Za-z'\- ]*)+/;
   }
 
   private async presentToast() {
@@ -73,7 +76,12 @@ export class GalleriePage implements OnInit {
         "Saisissez au moins un nom et un prénom séparé d'un espace";
     } else {
       this.nameError = false;
-      console.log('hello');
+    }
+  }
+
+  private checkGen() {
+    if (this.generique !== undefined) {
+      this.genError = false;
     }
   }
 
@@ -92,11 +100,17 @@ export class GalleriePage implements OnInit {
     });
   }
 
+  private checkNotAllowCharacters() {
+    this.beneficiaire = this.beneficiaire.replace(this.regexName, '');
+    return this.beneficiaire;
+  }
+
   private async deleteAndRetake() {
     await this.addOrdonnanceToGallery();
   }
 
   private async checkOrdonnance() {
+    this.checkNotAllowCharacters();
     if (
       this.beneficiaire !== undefined &&
       this.generique !== undefined &&
@@ -117,6 +131,8 @@ export class GalleriePage implements OnInit {
               const success = await this.presentToast();
               loading.dismiss();
               success.present();
+              this.beneficiaire = undefined;
+              this.generique = undefined;
             } else {
               const alert = await this.presentAlert(
                 "Une erreur s'est produite réessayer plus tard."
@@ -136,22 +152,21 @@ export class GalleriePage implements OnInit {
         const response = "Impossible d'envoyer l'ordonnance";
       }
     } else {
-      this.nameError =
-        this.beneficiaire === undefined ? 'Saisissez un bénéficiaire' : false;
-
-      this.nameError =
-        this.beneficiaire == null ? 'Saisissez un bénéficiaire' : false;
-
-      this.nameError =
-        // eslint-disable-next-line eqeqeq
-        this.beneficiaire == '' ? 'Saisissez un bénéficiaire' : false;
+      if (
+        this.beneficiaire === '' ||
+        this.beneficiaire === undefined ||
+        this.beneficiaire === null
+      ) {
+        this.nameError = 'Merci de saisir un bénéficiaire';
+      } else if (this.regexName.test(this.beneficiaire)) {
+        this.nameError =
+          'Mauvais format, merci de saisir un nom puis un prénom';
+      } else {
+        this.nameError = false;
+      }
 
       this.genError =
         this.generique === undefined ? 'Choisissez une option' : false;
-
-      this.nameError = !this.regexName.test(this.beneficiaire)
-        ? false
-        : 'Mauvais format, merci de saisir un nom puis un prénom';
     }
   }
 }

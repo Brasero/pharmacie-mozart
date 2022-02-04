@@ -1,12 +1,21 @@
 <ion-content>
   <ion-toolbar>
-    <ion-title style="text-align: center">Envoyer une ordonnance</ion-title>
+    <ion-icon
+      size="large"
+      slot="start"
+      src="../../assets/icons/addList.svg"
+    ></ion-icon>
+    <ion-title style="text-align: center" class="styleText1"
+      >Envoyer une ordonnance</ion-title
+    >
   </ion-toolbar>
   <ion-grid>
     <ion-row>
       <ion-col size="12">
         <ion-item>
-          <ion-label position="floating"> Bénéficiaire </ion-label>
+          <ion-label position="floating" class="styleText2">
+            Bénéficiaire
+          </ion-label>
           <ion-input
             [(ngModel)]="beneficiaire"
             autocapitalize="characters"
@@ -18,6 +27,7 @@
             size="15"
             placeholder="NOM - PRENOM"
             (ionChange)="checkName()"
+            (ionBlur)="checkName()"
             pattern="(?:[A-Za-z']+[ ]+[A-Za-z']+[ ]*[A-Za-z ]*)"
           >
           </ion-input>
@@ -28,10 +38,14 @@
       </ion-col>
       <ion-col size="12">
         <ion-item>
-          <ion-label position="floating">
+          <ion-label position="floating" class="styleText2">
             Acceptez vous les generiques ?
           </ion-label>
-          <ion-select [(ngModel)]="generique" interface="popover">
+          <ion-select
+            [(ngModel)]="generique"
+            (ionChange)="checkGen()"
+            interface="popover"
+          >
             <ion-select-option value="true">Oui</ion-select-option>
             <ion-select-option value="false">Non</ion-select-option>
           </ion-select>
@@ -41,8 +55,13 @@
         >
       </ion-col>
       <ion-col size="12">
-        <ion-button expand="block" color="success" (click)="checkOrdonnance()">
-          Valider
+        <ion-button
+          expand="block"
+          color="secondary"
+          class="styleText1 button"
+          (click)="checkOrdonnance()"
+        >
+          Envoyer l'ordonnance
         </ion-button>
       </ion-col>
       <ion-col
@@ -53,7 +72,11 @@
       </ion-col>
       <ion-col size="12" *ngIf="photoService.photos">
         <ion-button expand="block" color="danger" (click)="deleteAndRetake()">
-          <ion-icon slot="start" name="camera-outline"></ion-icon>
+          <ion-icon
+            slot="start"
+            name="camera-outline"
+            class="button"
+          ></ion-icon>
           Reprendre la photo
         </ion-button>
       </ion-col>

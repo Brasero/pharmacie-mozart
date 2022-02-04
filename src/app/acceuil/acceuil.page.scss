@@ -6,14 +6,17 @@
 }
 
 .brandLogo {
-  height: 190px;
+  height: 180px;
   width: --webkit-fill-available;
-  border: 1px solid black;
-  margin-top: 12%;
+  margin-top: 8%;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#brandLogo {
+  transform: scale(7);
 }
 
 .actionButton {
@@ -85,4 +88,20 @@
   width: 55px;
   border-radius: 25%;
   margin-inline: 0% !important;
+}
+
+.styleText1 {
+  font-family: 'Myriad Pro Bold', sans-serif;
+  font-size: 10px;
+  text-align: center;
+}
+
+.styleText2 {
+  font-style: 'Bahnschrift', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.styleText3 {
+  font-family: 'Myriad Pro Bold', sans-serif;
 }

@@ -24,3 +24,19 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+@font-face {
+  font-family: 'Myriad Pro Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Myriad Pro Bold'),
+    url('./assets/fonts/MYRIADPRO-BOLD.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Myriad Pro Light'),
+    url('./assets/fonts/MyriadPro-Light.woff') format('woff');
+}
