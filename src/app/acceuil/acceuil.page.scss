@@ -1,0 +1,107 @@
+.display-column-align-center * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-inline: 12%;
+}
+
+.brandLogo {
+  height: 180px;
+  width: --webkit-fill-available;
+  margin-top: 8%;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#brandLogo {
+  transform: scale(7);
+}
+
+.actionButton {
+  --border-radius: 12px;
+  font-weight: bold;
+}
+
+.town {
+  flex-direction: row !important;
+  margin: 0 !important;
+  width: 100% !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.ville {
+  margin: 0px !important;
+}
+
+.zip {
+  margin: 0px !important;
+  margin-right: 5px !important;
+}
+
+.navigateContainer {
+  margin-top: 25px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigateAppContainer {
+  height: 50px;
+  width: 200px;
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-around;
+  align-items: flex-start !important;
+}
+
+.navItem {
+  padding: 0;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  height: 120px;
+  width: 60px;
+}
+.navItem:nth-child(2) {
+  margin-left: 15px !important;
+}
+
+.wazeButton {
+  background: url('../../assets/icons/waze_icon.jfif') !important;
+  height: 60px !important;
+  background-clip: border-box;
+  background-size: cover !important;
+  width: 60px;
+  border-radius: 25%;
+  margin-inline: 0% !important;
+}
+
+.mapsButton {
+  background: url('../../assets/icons/google_map_icon.jpg') !important;
+  height: 55px !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-size: 300% !important;
+  width: 55px;
+  border-radius: 25%;
+  margin-inline: 0% !important;
+}
+
+.styleText1 {
+  font-family: 'Myriad Pro Bold', sans-serif;
+  font-size: 10px;
+  text-align: center;
+}
+
+.styleText2 {
+  font-style: 'Bahnschrift', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.styleText3 {
+  font-family: 'Myriad Pro Bold', sans-serif;
+}
