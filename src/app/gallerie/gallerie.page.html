@@ -70,6 +70,21 @@
       >
         <ion-img [src]="photo.webviewPath"></ion-img>
       </ion-col>
+      <ion-col size="12">
+        <ion-button
+          expand="block"
+          (click)="addMoreToGallery()"
+          color="secondary"
+          class="styleText1 button"
+        >
+          <ion-icon
+            slot="start"
+            name="add-circle-outline"
+            class="button"
+          ></ion-icon>
+          Ajouter une photo
+        </ion-button>
+      </ion-col>
       <ion-col size="12" *ngIf="photoService.photos">
         <ion-button expand="block" color="danger" (click)="deleteAndRetake()">
           <ion-icon
