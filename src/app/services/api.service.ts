@@ -41,21 +41,29 @@ export class ApiService {
     return throwError("Quelque chose s'est mal passé. Réessayer plus tard.");
   }
 
+  //Construction of the object to send
   async constructObject(b, g) {
     if (b !== undefined && g !== undefined) {
+      //Load the photo as base64
       await this.photo.loadSaved();
       const response = await fetch(this.photo.photos[0].webviewPath);
       const blob = await response.blob();
+      //Create formData object
       const obj: FormData = new FormData();
-      obj.append('image', this.photo.photos[0].webviewPath);
+      //Filling formData Object
       obj.append('beneficiaire', b);
       obj.append('generique', g);
+      //Filling formData object with saved photos
+      this.photo.photos.map((value, index) => {
+        obj.append('image' + index, value.webviewPath);
+      });
       return obj;
     } else {
       return false;
     }
   }
 
+  //Sending the object to server and looking for response
   sendOrdonnance(item: FormData): Observable<ApiMessage> {
     return this.http.post<ApiMessage>(this.base_path, item, this.httpOptions);
   }

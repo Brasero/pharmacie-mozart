@@ -100,6 +100,12 @@ export class GalleriePage implements OnInit {
     });
   }
 
+  private addMoreToGallery() {
+    this.photoService.addMoreToGallery().then(() => {
+      this.router.navigate(['/tabs/gallerie']);
+    });
+  }
+
   private checkNotAllowCharacters() {
     this.beneficiaire = this.beneficiaire.replace(this.regexName, '');
     return this.beneficiaire;

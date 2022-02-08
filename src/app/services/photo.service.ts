@@ -49,7 +49,7 @@ export class PhotoService {
   public async deletePhoto() {
     // Remove all photos from current storage.
     this.photos.splice(0, this.photos.length);
-    // Remove all photos from Local storage.
+    // Remove all photos from Local storage, by overwritting.
     Storage.set({
       key: this.PHOTO_STORAGE,
       value: JSON.stringify(null),
@@ -57,6 +57,7 @@ export class PhotoService {
   }
 
   public async addNewToGallery() {
+    //Opening camera view or loading local saved photo from gallery
     const capturedPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
       source: CameraSource.Prompt,
@@ -70,7 +71,9 @@ export class PhotoService {
       presentationStyle: 'popover',
       saveToGallery: false,
     });
+    //await for cleaning storage
     await this.deletePhoto();
+    //Saving image shot.
     const savedImageFile = await this.savePicture(capturedPhoto);
     this.photos.unshift(savedImageFile);
     Storage.set({
@@ -78,11 +81,35 @@ export class PhotoService {
       value: JSON.stringify(this.photos),
     });
   }
+
+  //Adding new image to the collection
+  public async addMoreToGallery() {
+    const capturedPhoto = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Prompt,
+      direction: CameraDirection.Rear,
+      quality: 100,
+      allowEditing: false,
+      promptLabelHeader: 'Nouvelle ordonnance',
+      promptLabelCancel: 'Annuler',
+      promptLabelPhoto: 'Gallerie',
+      promptLabelPicture: 'Prendre une photo',
+      presentationStyle: 'popover',
+      saveToGallery: false,
+    });
+    const savedImageFile = await this.savePicture(capturedPhoto);
+    this.photos.unshift(savedImageFile);
+    Storage.set({
+      key: this.PHOTO_STORAGE,
+      value: JSON.stringify(this.photos),
+    });
+  }
+
   private async savePicture(photo: Photo) {
     //Conversion de la photo en base 64
     const base64Data = await this.readAsBase64(photo);
 
-    //Enregistrement du fichier dans le dossier
+    //Enregistrement du fichier dans le dossier local de l'appareil
     const fileName = new Date().getTime() + '.jpeg';
     const savedFile = await Filesystem.writeFile({
       path: fileName,
