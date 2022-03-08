@@ -148,7 +148,6 @@ export class GalleriePage implements OnInit {
             }
           },
           async (error) => {
-            console.log(error);
             const alert = await this.presentAlert(error.statusText);
             alert.present();
             loading.dismiss();

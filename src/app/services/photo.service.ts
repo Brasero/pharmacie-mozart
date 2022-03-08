@@ -98,7 +98,13 @@ export class PhotoService {
       saveToGallery: false,
     });
     const savedImageFile = await this.savePicture(capturedPhoto);
-    this.photos.unshift(savedImageFile);
+    const libLength = this.photos.unshift(savedImageFile);
+    // Limite de 3 photos par envoie
+    if (libLength > 3) {
+      this.photos.splice(3, 1);
+    }
+    // ---- END -----
+
     Storage.set({
       key: this.PHOTO_STORAGE,
       value: JSON.stringify(this.photos),
