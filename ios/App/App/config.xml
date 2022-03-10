@@ -3,19 +3,19 @@
   <access origin="*" />
   
   <feature name="CallNumber">
-    <param name="android-package" value="mx.ferreyra.callnumber.CFCallNumber"/>
+    <param name="ios-package" value="CFCallNumber"/>
   </feature>
 
   <feature name="ActionSheet">
-    <param name="android-package" value="nl.xservices.plugins.actionsheet.ActionSheet"/>
+    <param name="ios-package" value="ActionSheet"/>
   </feature>
 
   <feature name="Notification">
-    <param name="android-package" value="org.apache.cordova.dialogs.Notification"/>
+    <param name="ios-package" value="CDVNotification"/>
   </feature>
 
   <feature name="LaunchNavigator">
-    <param name="android-package" value="uk.co.workingedge.phonegap.plugin.LaunchNavigatorPlugin"/>
+    <param name="ios-package" value="LaunchNavigatorPlugin"/>
   </feature>
 
   
