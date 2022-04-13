@@ -44,7 +44,14 @@
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
+    
     <platform name="ios">
+        <!--<edit-config target="NSCameraUsageDescription" mode="merge" overwrite="true" file="*-Info.plist">
+            <string>You can take photos</string>
+        </edit-config>
+        <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge" overwrite="true" >
+            <string>YOUR-PERMISSION-REQUEST</string>
+        </edit-config>-->
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
