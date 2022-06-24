@@ -1,27 +1,27 @@
 {
   "images" : [
     {
-      "filename" : "appstore-1.png",
+      "filename" : "Default-667h.png",
       "idiom" : "iphone",
       "scale" : "1x"
     },
     {
-      "filename" : "appstore-2.png",
+      "filename" : "Default-568h@2x~iphone.png",
       "idiom" : "iphone",
       "scale" : "2x"
     },
     {
-      "filename" : "appstore.png",
+      "filename" : "Default-2436h.png",
       "idiom" : "iphone",
       "scale" : "3x"
     },
     {
-      "filename" : "appstore-3.png",
+      "filename" : "Default@2x~ipad~anyany.png",
       "idiom" : "ipad",
       "scale" : "1x"
     },
     {
-      "filename" : "appstore-4.png",
+      "filename" : "Default-Portrait@2x~ipad.png",
       "idiom" : "ipad",
       "scale" : "2x"
     }
