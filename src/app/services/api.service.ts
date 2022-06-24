@@ -15,7 +15,7 @@ import { ApiMessage } from '../class/api-message';
 })
 export class ApiService {
   //API path
-  base_path = 'http://localhost/ApiAppTest/index.php';
+  base_path = 'https://apimozar.store/';
   //APIKey
   apiKey = ''; // <--- Enter Api Key;
   //Http options
@@ -57,7 +57,6 @@ export class ApiService {
       this.photo.photos.map((value) => {
         obj.append('image', value.webviewPath);
       });
-      console.log(obj.getAll('image'));
       return obj;
     } else {
       return false;
