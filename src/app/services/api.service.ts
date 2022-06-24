@@ -15,7 +15,7 @@ import { ApiMessage } from '../class/api-message';
 })
 export class ApiService {
   //API path
-  base_path = 'http://apimozar.store/';
+  base_path = 'https://apimozar.store/';
   //APIKey
   apiKey = ''; // <--- Enter Api Key;
   //Http options

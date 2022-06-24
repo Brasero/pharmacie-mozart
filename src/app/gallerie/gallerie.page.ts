@@ -41,7 +41,7 @@ export class GalleriePage implements OnInit {
   private async presentToast() {
     const toast = await this.toastCtrl.create({
       message: 'Votre ordonnance a bien été envoyée',
-      duration: 3000,
+      duration: 2000,
       color: 'success',
     });
 
