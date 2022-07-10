@@ -44,6 +44,15 @@ export class PhotoService {
         photo.webviewPath = `data:image/jpeg;base64,${readFile.data}`;
       }
     }
+    else{
+      for (let photo of this.photos){
+        const readFile = await Filesystem.readFile({
+          path: photo.phpFilepath,
+          directory: Directory.Data,
+        });
+        photo.webviewPath = `data:image/jpeg;base64,${readFile.data}`;
+      }
+    }
   }
 
   public async deletePhoto() {
@@ -75,6 +84,7 @@ export class PhotoService {
     await this.deletePhoto();
     //Saving image shot.
     const savedImageFile = await this.savePicture(capturedPhoto);
+    console.log({saved : savedImageFile});
     this.photos.unshift(savedImageFile);
     Storage.set({
       key: this.PHOTO_STORAGE,
@@ -126,9 +136,9 @@ export class PhotoService {
     if (this.platform.is('hybrid')) {
       return {
         filepath: savedFile.uri,
-        webviewPath: Capacitor.convertFileSrc(savedFile.uri),
+        webviewPath: photo.webPath, //The modification is here
         phpFilepath: fileName,
-        phpWebviewPath: photo.webPath,
+        phpWebviewPath: Capacitor.convertFileSrc(savedFile.uri),
       };
     } else {
       return {

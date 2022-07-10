@@ -16,9 +16,8 @@ import {
 })
 export class GalleriePage implements OnInit {
   beneficiaire: string;
-  generique: boolean;
+  commentaire: boolean;
   nameError: string | boolean = false;
-  genError: string | boolean = false;
   regexName: RegExp;
   regexName2: RegExp;
 
@@ -33,7 +32,7 @@ export class GalleriePage implements OnInit {
 
   ngOnInit() {
     this.beneficiaire = undefined;
-    this.generique = undefined;
+    this.commentaire = undefined;
     this.regexName = /[²&~`{}()\@!#$£¤%§\\/":<>\?|;\[\]\^,*.+¨€]+/g;
     this.regexName2 = /(?:[A-Za-z'\-]+[ ]+[A-Za-z'\-]+[ ]*[A-Za-z'\- ]*)+/;
   }
@@ -79,12 +78,6 @@ export class GalleriePage implements OnInit {
     }
   }
 
-  private checkGen() {
-    if (this.generique !== undefined) {
-      this.genError = false;
-    }
-  }
-
   private async presentLoading() {
     const loading = await this.loadingCtrl.create({
       message: 'Envoi en cours...',
@@ -119,7 +112,6 @@ export class GalleriePage implements OnInit {
     this.checkNotAllowCharacters();
     if (
       this.beneficiaire !== undefined &&
-      this.generique !== undefined &&
       !this.regexName.test(this.beneficiaire) &&
       this.beneficiaire !== null &&
       this.beneficiaire !== ''
@@ -128,7 +120,7 @@ export class GalleriePage implements OnInit {
       loading.present();
       const obj = await this.api.constructObject(
         this.beneficiaire,
-        this.generique
+        this.commentaire
       );
       if (obj !== false) {
         this.api.sendOrdonnance(obj).subscribe(
@@ -138,7 +130,7 @@ export class GalleriePage implements OnInit {
               loading.dismiss();
               success.present();
               this.beneficiaire = undefined;
-              this.generique = undefined;
+              this.commentaire = undefined;
             } else {
               const alert = await this.presentAlert(
                 "Une erreur s'est produite réessayer plus tard."
@@ -169,9 +161,6 @@ export class GalleriePage implements OnInit {
       } else {
         this.nameError = false;
       }
-
-      this.genError =
-        this.generique === undefined ? 'Choisissez une option' : false;
     }
   }
 }

@@ -52,7 +52,7 @@ export class ApiService {
       const obj: FormData = new FormData();
       //Filling formData Object
       obj.append('beneficiaire', b);
-      obj.append('generique', g);
+      obj.append('commentaire', g);
       //Filling formData object with saved photos
       this.photo.photos.map((value) => {
         obj.append('image[]', value.webviewPath);
