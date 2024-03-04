@@ -30,3 +30,7 @@ ion-toolbar {
 .button {
   --border-radius: 12px;
 }
+
+.blurContent{
+  filter: blur(5px);
+}

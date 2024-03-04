@@ -17,9 +17,11 @@ import {
 export class GalleriePage implements OnInit {
   beneficiaire: string;
   commentaire: boolean;
+  phoneNumber: string;
   nameError: string | boolean = false;
   regexName: RegExp;
   regexName2: RegExp;
+  send = false;
 
   constructor(
     public photoService: PhotoService,
@@ -33,6 +35,7 @@ export class GalleriePage implements OnInit {
   ngOnInit() {
     this.beneficiaire = undefined;
     this.commentaire = undefined;
+    this.phoneNumber = undefined;
     this.regexName = /[²&~`{}()\@!#$£¤%§\\/":<>\?|;\[\]\^,*.+¨€]+/g;
     this.regexName2 = /(?:[A-Za-z'\-]+[ ]+[A-Za-z'\-]+[ ]*[A-Za-z'\- ]*)+/;
   }
@@ -40,8 +43,9 @@ export class GalleriePage implements OnInit {
   private async presentToast() {
     const toast = await this.toastCtrl.create({
       message: 'Votre ordonnance a bien été envoyée',
-      duration: 2000,
+      duration: 3500,
       color: 'success',
+      position: 'middle'
     });
 
     toast.onDidDismiss().then(() => {
@@ -70,7 +74,7 @@ export class GalleriePage implements OnInit {
     } else {
       this.nameError = false;
     }
-    if (!this.regexName2.test(this.beneficiaire)) {
+    if (!this.regexName2.test(this.beneficiaire) && this.beneficiaire !== undefined) {
       this.nameError =
         "Saisissez au moins un nom et un prénom séparé d'un espace";
     } else {
@@ -114,13 +118,17 @@ export class GalleriePage implements OnInit {
       this.beneficiaire !== undefined &&
       !this.regexName.test(this.beneficiaire) &&
       this.beneficiaire !== null &&
-      this.beneficiaire !== ''
+      this.beneficiaire !== '' &&
+      this.phoneNumber !== undefined &&
+      this.phoneNumber !== null &&
+      this.phoneNumber !== ''
     ) {
       const loading = await this.presentLoading();
       loading.present();
       const obj = await this.api.constructObject(
         this.beneficiaire,
-        this.commentaire
+        this.commentaire,
+        this.phoneNumber
       );
       if (obj !== false) {
         this.api.sendOrdonnance(obj).subscribe(
@@ -131,6 +139,9 @@ export class GalleriePage implements OnInit {
               success.present();
               this.beneficiaire = undefined;
               this.commentaire = undefined;
+              this.phoneNumber = undefined;
+              this.nameError = undefined;
+              this.send = true;
             } else {
               const alert = await this.presentAlert(
                 "Une erreur s'est produite réessayer plus tard."
@@ -140,6 +151,7 @@ export class GalleriePage implements OnInit {
             }
           },
           async (error) => {
+            window.alert(JSON.stringify(error));
             const alert = await this.presentAlert(error.statusText);
             alert.present();
             loading.dismiss();

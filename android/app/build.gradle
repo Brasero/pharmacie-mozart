@@ -1,13 +1,27 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    defaultConfig {
-        applicationId "io.ionic.starter"
+    signingConfigs {
+        debug {
+            storeFile file('/Users/admin/Desktop/ionicApp/androidKeys/keystore.jks')
+            storePassword '21.09RIcci95'
+            keyAlias 'pharmacie-mozart-key'
+            keyPassword '21.09RIcci95'
+        }
+        release {
+          storeFile file('/Users/admin/Desktop/ionicApp/androidKeys/keystore.jks')
+          storePassword '21.09RIcci95'
+          keyAlias 'pharmacie-mozart-key'
+          keyPassword '21.09RIcci95'
+        }
+    }
+  compileSdk 31
+  defaultConfig {
+        applicationId "jkc.pharmacie.mozart"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName '1.2'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

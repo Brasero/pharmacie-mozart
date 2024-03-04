@@ -42,7 +42,7 @@ export class ApiService {
   }
 
   //Construction of the object to send
-  async constructObject(b, g) {
+  async constructObject(b, g, p) {
     if (b !== undefined && g !== undefined) {
       //Load the photo as base64
       await this.photo.loadSaved();
@@ -53,9 +53,10 @@ export class ApiService {
       //Filling formData Object
       obj.append('beneficiaire', b);
       obj.append('commentaire', g);
+      obj.append('numero', p);
       //Filling formData object with saved photos
-      this.photo.photos.map((value) => {
-        obj.append('image[]', value.webviewPath);
+      this.photo.photos.map((value, index) => {
+        obj.append(`image[${index}]`, value.webviewPath);
       });
       return obj;
     } else {
