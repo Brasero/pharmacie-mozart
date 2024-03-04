@@ -48,7 +48,7 @@ export class ApiService {
       await this.photo.loadSaved();
       const response = await fetch(this.photo.photos[0].webviewPath);
       const blob = await response.blob();
-      //Create formData objectgitpushpusjhhBrasero21.09RIcci95
+      //Create formData object
       const obj: FormData = new FormData();
       //Filling formData Object
       obj.append('beneficiaire', b);
