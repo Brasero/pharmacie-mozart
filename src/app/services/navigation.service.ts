@@ -14,8 +14,7 @@ export class NavigationService {
     private launchNavigator: LaunchNavigator,
     private alertCtrl: AlertController
   ) {}
-
-  public navigateWith(app) {
+  public navigateWith(app: "waze" | "google") {
     let options: LaunchNavigatorOptions;
     let destination;
     let appName;
@@ -35,7 +34,7 @@ export class NavigationService {
 
     this.launchNavigator.navigate(destination, options).then(
       (success) => console.log('success: ', success),
-      async (error) => await this.presentAlert(appName)
+      async () => await this.presentAlert(appName)
     );
   }
 
