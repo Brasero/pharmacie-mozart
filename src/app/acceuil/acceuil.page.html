@@ -24,24 +24,10 @@
     </div>
   </div>
   <div class="navigateContainer">
-    <p class="styleText1">Voir le trajet sur :</p>
     <div class="navigateAppContainer">
-      <div class="navItem">
-        <button
-          type="button"
-          class="mapsButton"
-          (click)="navigate('google')"
-        ></button>
-        <p class="styleText1">Google maps</p>
-      </div>
-      <div class="navItem">
-        <button
-          type="button"
-          class="wazeButton"
-          (click)="navigate('waze')"
-        ></button>
-        <p class="styleText1">Waze</p>
-      </div>
+     <ion-button color="primary" (click)="presentActionSheet()">
+       Se rendre à la pharmacie
+     </ion-button>
     </div>
   </div>
 </ion-content>
