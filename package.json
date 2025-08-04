@@ -42,6 +42,7 @@
     "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-dialogs": "^2.0.2",
     "ionic": "^5.4.16",
+    "ios-deploy": "^1.11.4",
     "ruby": "^0.6.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
